@@ -1,0 +1,40 @@
+cabal-version:      3.0
+name:               visg
+version:            0.1.0.0
+license:            GPL-3.0-only
+license-file:       LICENSE
+author:             ProggerX
+maintainer:         x@proggers.ru
+category:           Graphics
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  Visg, Visg.Parser
+    -- other-modules:
+    -- other-extensions:
+    build-depends:    base >=4.18.2.1, gloss, text, megaparsec, mtl
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+executable visg
+    import:           warnings
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.18.2.1,
+        visg
+
+    hs-source-dirs:   app
+    default-language: GHC2021
+
+test-suite test
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Main.hs
+  build-depends: base, tasty, tasty-hunit, visg
+  default-language: GHC2021
