@@ -2,6 +2,7 @@ module Visg where
 
 import Control.Monad.State (State, evalState, get, put)
 import Data.Maybe (fromMaybe)
+import Debug.Trace (trace)
 import Graphics.Gloss
 import Visg.Parser qualified as P
 
@@ -32,7 +33,7 @@ drawCode act = case P.code act of
     let nz = fromMaybe cz $ as !? 'Z'
     put (nx, ny, nz)
     pure $ color (makeColorI 255 (negate $ round nz `mod` 255) 0 255) $ pictures [translate nx ny $ circle 0.5, line [(cx, cy), (nx, ny)]]
-  _ -> error $ show (P.code act) ++ " is not yet supported"
+  _ -> trace (show (P.code act) ++ " is not yet supported") (pure blank)
 
 drawGCode :: [P.Action] -> Picture
 drawGCode s = evalState (pictures <$> mapM drawCode s) (0, 0, 0)
