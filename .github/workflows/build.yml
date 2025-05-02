@@ -21,13 +21,14 @@ jobs:
         cabal-version: '3.12'
     - name: Install dependencies
       run: |
+        sudo apt update
+        sudo apt install build-essential mesa-utils freeglut3-dev binutils-gold g++ g++ mesa-common-dev libglew-dev libglm-dev 
         cabal update
         cabal build --only-dependencies
     - name: Test
       run: cabal test
   build:
     runs-on: windows-latest
-    needs: [test]
     steps:
     - uses: actions/checkout@v4
     - uses: haskell-actions/setup@v2
@@ -49,7 +50,6 @@ jobs:
           visg.exe
   build-linux:
     runs-on: ubuntu-latest
-    needs: [test]
     steps:
     - uses: actions/checkout@v4
     - uses: haskell-actions/setup@v2
@@ -58,12 +58,14 @@ jobs:
         cabal-version: '3.12'
     - name: Install dependencies
       run: |
+        sudo apt update
+        sudo apt install build-essential mesa-utils freeglut3-dev binutils-gold g++ g++ mesa-common-dev libglew-dev libglm-dev libgl1-mesa-dev
         cabal update
         cabal build --only-dependencies
     - name: Build
-      run: cabal build --enable-executable-static
+      run: cabal build
     - name: Install
-      run: cabal install --installdir . --enable-executable-static
+      run: cabal install --installdir .
     - uses: actions/upload-artifact@v4
       with:
         name: visg-linux
