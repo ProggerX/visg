@@ -9,7 +9,7 @@ import Visg.Parser (Action (..))
 type CNC = State (Float, Float, Float, Float, Float)
 
 drawG02Arc' :: Float -> Float -> Float -> Action -> (Picture, Float, Float)
-drawG02Arc' cx cy cz action = (color (makeColorI 255 (round cz `mod` 255) 255 255) $ line points, x, y)
+drawG02Arc' cx cy cz action = (color (makeColorI 255 (round (abs cz) `mod` 255) 255 255) $ line points, x, y)
  where
   assocs' = assocs action
   x = fromJust $ lookup 'X' assocs'
@@ -63,7 +63,7 @@ drawG02Arc' cx cy cz action = (color (makeColorI 255 (round cz `mod` 255) 255 25
       angles
 
 drawG03Arc' :: Float -> Float -> Float -> Action -> (Picture, Float, Float)
-drawG03Arc' cx cy cz action = (color (makeColorI 255 (round cz `mod` 255) 255 255) $ line points, x, y)
+drawG03Arc' cx cy cz action = (color (makeColorI 255 (round (abs cz) `mod` 255) 255 255) $ line points, x, y)
  where
   assocs' = assocs action
   x = fromJust $ lookup 'X' assocs'
