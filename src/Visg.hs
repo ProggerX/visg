@@ -39,13 +39,14 @@ drawCode act = case P.code act of
   _ -> trace (show (P.code act) ++ " is not yet supported") (pure blank)
 
 grid :: Int -> Float -> Picture
-grid gridSize cellSize =
+grid gridSize' cellSize =
   color (greyN 0.2) $
     pictures $
       [line [(x, -half), (x, half)] | i <- [0 .. gridSize], let x = fromIntegral i * cellSize - half]
         ++ [line [(-half, y), (half, y)] | i <- [0 .. gridSize], let y = fromIntegral i * cellSize - half]
  where
   half = (fromIntegral gridSize * cellSize) / 2
+  gridSize = gridSize' + (gridSize' `mod` 2)
 
 drawGCode :: [P.Action] -> (Picture, Float, Float)
 drawGCode s =
