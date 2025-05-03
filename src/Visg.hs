@@ -4,6 +4,7 @@ import Control.Monad.State (State, get, modify, runState)
 import Data.Maybe (fromMaybe)
 import Debug.Trace (trace)
 import Graphics.Gloss
+import Visg.Arcs (drawG02Arc, drawG03Arc)
 import Visg.Parser qualified as P
 
 type CNC = State (Float, Float, Float, Float, Float)
@@ -35,7 +36,9 @@ drawCode act = case P.code act of
     let ny = fromMaybe cy $ as !? 'Y'
     let nz = fromMaybe cz $ as !? 'Z'
     move nx ny nz
-    pure $ color (makeColorI 255 (negate $ round nz `mod` 255) 0 255) $ pictures [translate nx ny $ circle 0.5, line [(cx, cy), (nx, ny)]]
+    pure $ color (makeColorI 255 (negate (round nz) `mod` 255) 0 255) $ pictures [translate nx ny $ circle 0.5, line [(cx, cy), (nx, ny)]]
+  "G2" -> drawG02Arc act
+  "G3" -> drawG03Arc act
   _ -> trace (show (P.code act) ++ " is not yet supported") (pure blank)
 
 grid :: Int -> Float -> Picture
