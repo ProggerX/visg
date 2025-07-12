@@ -3,7 +3,7 @@ module Visg where
 import Control.Monad.State (State, get, modify, runState)
 import Data.Maybe (fromMaybe)
 import Debug.Trace (trace)
-import Graphics.Gloss
+import Brillo
 import Visg.Arcs (drawG02Arc, drawG03Arc)
 import Visg.Parser qualified as P
 

@@ -16,7 +16,7 @@ library
     exposed-modules:  Visg, Visg.Parser, Visg.Arcs
     -- other-modules:
     -- other-extensions:
-    build-depends:    base >=4.18.2.1, gloss, text, megaparsec, mtl
+    build-depends:    base >=4.18.2.1, brillo, text, megaparsec, mtl
     hs-source-dirs:   src
     default-language: GHC2021
 
@@ -26,7 +26,7 @@ executable visg
     -- other-modules:
     -- other-extensions:
     build-depends:
-        base ^>=4.18.2.1,
+        base >=4.18.2.1,
         visg
 
     hs-source-dirs:   app
