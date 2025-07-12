@@ -18,6 +18,7 @@
             drv:
             pkgs.haskell.lib.addBuildTools drv [
               pkgs.mkdocs
+              pkgs.haskell-language-server
             ];
         };
     in
