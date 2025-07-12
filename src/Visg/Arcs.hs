@@ -3,7 +3,7 @@ module Visg.Arcs where
 import Control.Monad.State (State, get, put)
 import Data.Fixed (mod')
 import Data.Maybe (fromJust)
-import Graphics.Gloss (Picture, color, line, makeColorI)
+import Brillo (Picture, color, line, makeColorI)
 import Visg.Parser (Action (..))
 
 type CNC = State (Float, Float, Float, Float, Float)
